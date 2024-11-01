@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correção Prova</title>
+</head>
+<body>
+    <script>
+        console.info("Exercício 1 - Item A");
+
+        const numeros = [5 , 12 , 8 , 130 , 44 , 5 , 12 , 5 , 44];
+        
+        console.log(Math.max(...numeros));
+
+        console.info("Exercício 1 - Item B");
+
+        console.log(numeros.sort((a,b) => a - b));
+
+        console.info("Exercício 1 - Item C");
+
+        console.log(numeros.filter(n => (n % 2) !== 0))
+
+        console.info("Exercício 1 - Item D");
+
+        let vLogico = [];
+        let maisVezes = -1;
+        let numMaisVezes = -1;
+
+        for(let n of numeros){
+            vLogico[n] = true;
+        }
+
+        for(let i = 0; i < vLogico.length; i++){
+            if(vLogico[i] > maisVezes){
+                maisVezes = vLogico[i];
+                numMaisVezes = i;
+            }
+        }
+
+        console.log(numMaisVezes);
+
+        console.info("Exercício 2");
+
+        const nomes = [ " miguel silva " , " maria oliveira " , " pedro almeida " , " ana costa marinho " ];
+
+        for(let n of nomes){
+            let nQuebrado = n.trim().split(" ");
+            let novoNomeVetor = [];
+
+            for(let nq of nQuebrado){
+                let novoNome = nq[0].toUpperCase() + nq.slice(1);
+                novoNomeVetor.push(novoNome);
+            }
+
+            console.log(novoNomeVetor.join(" "));
+        }
+
+        console.info("Exercício 3");
+
+        let maiorNome = (...nomes) => {
+
+            let mNome = "";
+            let tamMaiorNome = -1;
+
+            for(n of nomes){
+                if(n.length > tamMaiorNome){
+                    tamMaiorNome = n.length;
+                    mNome = n;
+                }
+            }
+
+            return mNome;
+
+        }
+
+        console.log(maiorNome("miguel silva" , "maria oliveira" , "pedro almeida" , "ana costa marinho"));
+
+        console.info("Exercício 4");
+        
+        const aluno = { nome : "Pedro" , idade : 18 , nota : 9.5 };
+        
+        for(let a in aluno){
+            console.log(`${a} => ${aluno[a]}`);
+        }
+
+        console.info("Exercício 5 - Item A");
+        
+        const pessoas = [
+            { nome : " Pedro " , idade : 25 , cidade : " Araraquara " } ,
+            { nome : " Maria " , idade : 32 , cidade : " Rio de Janeiro " } ,
+            { nome : " Pedro " , idade : 45 , cidade : " Curitiba " } ,
+            { nome : " Ana " , idade : 22 , cidade : " Araraquara " } ,
+            { nome : " Lucas " , idade : 29 , cidade : " Rio de Janeiro " } ,
+            { nome : " Carla " , idade : 34 , cidade : " Curitiba " } ,
+            { nome : " Paulo " , idade : 41 , cidade : " Araraquara " } ,
+            { nome : " Fernanda " , idade : 27 , cidade : " Rio de Janeiro " } ,
+            { nome : " Bruno " , idade : 38 , cidade : " Curitiba " } ,
+            { nome : " Juliana " , idade : 31 , cidade : " Araraquara " }
+        ];
+        
+        console.log(pessoas.filter(p => p.cidade.trim() === "Araraquara"));
+
+        console.info("Exercício 5 - Item B");
+        
+        pessoas.forEach(p => console.log(`Olá ${p.nome} seja bem vindo a cidade de ${p.cidade}!`));
+        
+        console.info("Exercício 5 - Item C");
+        
+        console.log(pessoas.reduce((menorPessoa, p) => menorPessoa.idade > p.idade ? p : menorPessoa, 
+        { nome : "" , idade : 10000 , cidade : "" }));
+        
+        console.info("Exercício 5 - Item D");
+        
+        console.log(pessoas.filter(p => p.idade > 30).map(p => p.nome));
+        
+        console.info("Exercício 6");
+
+        function contarPares(sapatos) {
+            const esquerdo = {};
+            const direito = {};
+            let pares = 0;
+        
+            sapatos.forEach(sapato => {
+                if (sapato.lado === 'esquerdo') {
+                    if (direito[sapato.tamanho] > 0) {
+                        direito[sapato.tamanho]--;
+                        pares++;
+                    } else {
+                        esquerdo[sapato.tamanho] = (esquerdo[sapato.tamanho] || 0) + 1;
+                    }
+                } else if (sapato.lado === 'direito') {
+                    if (esquerdo[sapato.tamanho] > 0) {
+                        esquerdo[sapato.tamanho]--;
+                        pares++;
+                    } else {
+                        direito[sapato.tamanho] = (direito[sapato.tamanho] || 0) + 1;
+                    }
+                }
+            });
+        
+            return pares;
+        }
+        
+        // Exemplo de uso:
+        const sapatos = [
+            { lado: 'esquerdo', tamanho: '34' },
+            { lado: 'direito', tamanho: '34' },
+            { lado: 'esquerdo', tamanho: '36' },
+            { lado: 'direito', tamanho: '36' },
+            { lado: 'esquerdo', tamanho: '36' },
+            { lado: 'direito', tamanho: '37' },
+            { lado: 'esquerdo', tamanho: '36' },
+            { lado: 'direito', tamanho: '34' },
+            { lado: 'esquerdo', tamanho: '39' },
+            { lado: 'direito', tamanho: '40' },
+            { lado: 'esquerdo', tamanho: '34' }
+        ];
+        
+        console.log(contarPares(sapatos)); // Saída: 3 (2 pares de tamanho 34 e 1 par de tamanho 36)
+        
+
+    </script>
+</body>
+</html>
